@@ -1,0 +1,45 @@
+body{
+    font-size: 15px!important;
+    font-family: 'Open Sans', sans-serif!important;
+}
+
+label {
+    width: 180px;
+    display: inline-block;
+    color: #000;
+    /* font-weight: bold; */
+}
+
+.row {
+    margin-bottom: 15px;
+}
+
+legend {
+    font-size: 18px;
+    padding: 0 10px;
+    margin-bottom: 15px;
+}
+
+fieldset {
+    margin-bottom: 20px;
+    border: 1px solid #d2d2d2;
+}
+
+select {
+    height: 25px;
+    /* min-width: 100px; */
+}
+
+input[type="text"] {
+    height: 20px;
+    padding: 0 5px;
+}
+
+button.btn.btn-danger {
+    background: #29c75f;
+    color: #fff;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    border: none;
+    font-size: 20px;
+}

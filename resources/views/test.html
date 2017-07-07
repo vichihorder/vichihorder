@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+
+        }
+        .wapper{
+
+            height: 900px;
+            margin: 0px auto;
+            background: red;
+        }
+        .menu-main>ul>li {
+            list-style: none;
+            float: left;
+            padding: 30px 22px;
+            position: relative;
+            border-right: 1px dotted #a9b7c6;
+
+        }
+        .menu-main>ul>li:last-child{ border-right: none}
+        .menu-main{
+            margin-top: 40px;
+            background: #0b6198;
+        }
+        .clear {
+            clear: both;
+        }
+
+        .menu-main>ul>li>ul { display: none;position: absolute;background:#0b6198 ;top: 80px;left: 0px;width: 198px}
+
+        .menu-main>ul>li:hover ul { display: block;} /* phai sat vao nhau thi moi nhan */
+
+        li{list-style: none}
+
+        a{ text-decoration: none;color: #1a1a1a;font-size: 18px }
+
+
+
+        .menu-main>ul>li>ul>li {
+
+            height: 40px;
+            border-top: 1px dotted #a9b7c6;
+            padding: 10px;
+        }
+
+        .menu-main ul li:hover {background: rebeccapurple ; transition: all 0.25s}
+        .click{
+            display: none;}
+        ._li:hover .click{
+            display: block;
+        }
+        .menu-main ul li:hover .click{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wapper">
+        <div class="menu-main">
+            <ul>
+                <li><a href="">home</a></li>
+                <li><a href="">home</a></li>
+                <li class="">
+                    <a href="">home2</a>
+                    <button class="click">click</button>
+                    <ul>
+                        <li><a href="">home hom 1</a> </li>
+                        <li><a href="">home hom 1</a> </li>
+                        <li><a href="">home hom 1</a> </li>
+                    </ul>
+                </li>
+                <li><a href="">home</a> <button class="click">click</button></li>
+                <li><a href="">home</a> <button class="click">click</button></li>
+                <li><a href="">home</a> <button class="click">click</button></li>
+                <li><a href="">home</a> <button class="click">click</button></li>
+
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "nhatminh247",
+  "homepage": "nhatminh247.vn",
+  "authors": [
+    "vanhs <nhatminh14071990@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lightbox2": "^2.9.0",
+    "summernote": "^0.8.2",
+    "wysihtml": "^0.5.5"
+  }
+}

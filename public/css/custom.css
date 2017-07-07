@@ -1,0 +1,164 @@
+.sidebar-nav{
+    padding: 0!important;
+}
+
+.panel-nhatminh{
+    border-color: #29c75f!important;
+}
+
+.panel-nhatminh .panel-heading{
+    background: #29c75f!important;
+    color: #fff!important;;
+    border-bottom-color: #29c75f!important;;
+}
+
+.no-padding-leftright, .no-padding-leftright td, .no-padding-leftright th{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.navbar .navbar-collapse .navbar-nav > li.dropdown.arrow-none:hover:after{
+    display: none!important;
+}
+
+.width-auto{
+    width: auto!important;
+}
+
+.border-top-none{
+    border-top:none!important;
+}
+
+.cart-title{
+    margin-top: 0;
+}
+
+/** page order detail backend **/
+#order-detail-page .order-fee{
+    margin: 0 0 30px 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    width: 100%;
+}
+#order-detail-page .order-fee li{
+    width: 25%;
+    float: left;
+    padding: 15px 0;
+}
+#order-detail-page .order-fee li label{
+    font-size: 12px;
+}
+
+/** css box chat **/
+#box-chat-right .comment-text-grey{
+    color: grey!important;
+}
+
+#box-chat-right .comment-panel-view{
+    list-style: none;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+}
+
+/** page customer cart **/
+._shop{
+    margin-bottom: 30px!important;
+}
+
+/** page create package **/
+.form-list-item{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /* margin-bottom: 20px; */
+}
+.form-list-item li{
+    margin-bottom: 20px;
+}
+.form-list-item li:last-child{
+    margin-bottom: 0;
+}
+
+.notifyjs-corner{
+    z-index: 300008!important;
+}
+
+/** begin css Process Steps **/
+.stepwizard-step p {
+    margin-top: 10px;
+}
+
+.stepwizard-row {
+    display: table-row;
+}
+
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+
+}
+
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+/** end css Process Steps **/
+
+
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+
+}
+.well-legend {
+    background: #29c75f;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    width: auto;
+    padding: 2px 7px 2px 5px;
+    margin-bottom: 20px;
+    line-height: inherit;
+    /*color: #333;*/
+    /*background: #fff;*/
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
