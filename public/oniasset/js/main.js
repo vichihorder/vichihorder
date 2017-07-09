@@ -12,13 +12,15 @@ function enPrice(x){
     return x;
 }
 
-// abc
-function viewMore(){
+/**
+ * Action auto hide box if too height
+ * Options: class: more   data-max-height: Int
+ */
+function _viewMore(){
+    var moretext = 'Xem thêm <i class="fa fa-angle-double-down"></i>';
+    var lesstext = 'Thu gọn <i class="fa fa-angle-double-up"></i>';
     $('.more').each(function() {
-
         var hs = $(this).data("max-height");  // Max height display
-        var moretext = 'Xem thêm <i class="fa fa-angle-double-down"></i>';
-        var lesstext = 'Thu gọn <i class="fa fa-angle-double-up"></i>';
         var view_btn = '<a class="morelink _less">' + moretext + '</a></span>';
         var content = $(this).height();
 
@@ -27,44 +29,24 @@ function viewMore(){
             $(this).addClass("collapse");
             $(this).after(view_btn);
         }
+    });
 
-        $(".morelink").click(function(){
-            if($(this).hasClass("_less")) {
-                $(this).removeClass("_less");
-                $(this).prev().css("height", "");
-                $(this).html(lesstext);
-            } else {
-                $(this).addClass("_less");
-                $(this).prev().css("height", hs);
-                $(this).html(moretext);
-            }
-        });
+    $(document).on("click",".morelink",function () {
+        var hs = $(this).prev().data("max-height");
+        if($(this).hasClass("_less")) {
+            $(this).removeClass("_less");
+            $(this).prev().css("height", "");
+            $(this).html(lesstext);
+        } else {
+            $(this).addClass("_less");
+            $(this).prev().css("height", hs);
+            $(this).html(moretext);
+        }
     });
 }
 
 $(document).ready(function($) {
-    viewMore();
-
-    // Vietnamese
-    jQuery.timeago.settings.strings = {
-        prefixAgo: 'cách đây',
-        prefixFromNow: null,
-        suffixAgo: null,
-        suffixFromNow: "trước",
-        seconds: "chưa đến một phút",
-        minute: "khoảng một phút",
-        minutes: "%d phút",
-        hour: "khoảng một tiếng",
-        hours: "khoảng %d tiếng",
-        day: "một ngày",
-        days: "%d ngày",
-        month: "khoảng một tháng",
-        months: "%d tháng",
-        year: "khoảng một năm",
-        years: "%d năm",
-        wordSeparator: " ",
-        numbers: []
-    };
+    _viewMore();
 
     // Tooltips demo
     $('.tooltip-demo').tooltip({
@@ -133,6 +115,11 @@ $(document).ready(function($) {
                             $('.cart_qty').text(response.data.statistic.total_items);
                             $('.cart_total').text(enPrice(response.data.statistic.total_amount));
 
+                            var comma_separator_number_step = $.animateNumber.numberStepFactories.separator('.');
+                            $('.animate_number').each(function(i){
+                                $(this).animateNumber({ number: $(this).data('money'), numberStep: comma_separator_number_step });
+                            });
+
                             swal("Đã xóa thành công!", "Bạn đã xóa Item #" + itemID + " thành công.", "success");
                         }else{
                             swal({
@@ -182,6 +169,18 @@ $(document).ready(function($) {
                             $('.shops_count').text(response.data.statistic.total_shops);
                             $('.cart_qty').text(response.data.statistic.total_items);
                             $('.cart_total').text(enPrice(response.data.statistic.total_amount));
+
+                            /* Set data for animate Number
+                            $('.shops_count').data('money', response.data.statistic.total_shops);
+                            $('.cart_qty').data('money', response.data.statistic.total_items);
+                            $('.cart_total').data('money', response.data.statistic.total_amount);
+
+                            // Run animate Number
+                            var comma_separator_number_step = $.animateNumber.numberStepFactories.separator('.');
+                            $('.animate_number').each(function(i){
+                                $(this).animateNumber({ number: $(this).data('money'), numberStep: comma_separator_number_step });
+                            });
+                            */
 
                             swal("Đã xóa thành công!", "Bạn đã xóa Shop #" + shopID + " thành công.", "success");
                         } else {
@@ -241,6 +240,11 @@ $(document).ready(function($) {
                                     // Set new value
                                     $('#shop-item-' + itemID + ' .sub_total_vnd').text(enPrice(sub_total_vnd));
                                     $('#shop-item-' + itemID + ' .sub_total').text(sub_total);
+
+                                    /* Set data for animate Number
+                                    $('#shop-item-' + itemID + ' .sub_total_vnd').data('money', sub_total_vnd);
+                                    $('#shop-item-' + itemID + ' .sub_total').data('money', sub_total);
+                                    */
                                 }
                             });
 
@@ -249,8 +253,18 @@ $(document).ready(function($) {
                             $('#shop-'+ shopID +' .shop_total_vnd').text(enPrice(shop_total));
                             $('#shop-'+ shopID +' .shop_buying_fee').text(enPrice(shop_buying));
 
-                            // Test
-                            console.log(response.data);
+                            /* Set data for animate Number
+                            $('#shop-'+ shopID +' .shop_items').data('money', shop_items_count);
+                            $('#shop-'+ shopID +' .shop_total_vnd').data('money', shop_total);
+                            $('#shop-'+ shopID +' .shop_buying_fee').data('money', shop_buying);
+                            */
+
+                            /* Run animate Number
+                            var comma_separator_number_step = $.animateNumber.numberStepFactories.separator('.');
+                            $('.animate_number').each(function(i){
+                                $(this).animateNumber({ number: $(this).data('money'), numberStep: comma_separator_number_step });
+                            });
+                            */
                         }
                     });
                     $('.cart_qty').text(response.data.statistic.total_items);

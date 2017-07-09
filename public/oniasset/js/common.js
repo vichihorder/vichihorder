@@ -214,7 +214,7 @@ function call_ajax($that, data_send){
                         $(response.anchor).html(response.html);
                         parent = response.anchor;
                     }else{
-                        $('#_content').html(response.html);
+                        $('#_content').replaceWith(response.html);
                         parent = '#_content';
                     }
 
