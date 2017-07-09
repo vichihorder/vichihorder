@@ -12,6 +12,36 @@ function enPrice(x){
     return x;
 }
 
+function notify(title, text, type){
+    if(type == "error"){
+        icon = "fa fa-exclamation";
+    }else if(type == "warning"){
+        icon = "fa fa-warning";
+    }else if(type == "success"){
+        icon = "fa fa-check";
+    }else if(type == "info"){
+        icon = "fa fa-question";
+    }else{
+        icon = "fa fa-circle-o";
+    }
+
+    $.notify({
+        title: title,
+        text: text,
+        image: '<i class="'+ icon +'"></i>'
+    }, {
+        style: 'metro',
+        className: type,
+        globalPosition: 'top right',
+        showAnimation: "show",
+        showDuration: 0,
+        hideDuration: 0,
+        autoHideDelay: 3000,
+        autoHide: true,
+        clickToHide: true
+    });
+}
+
 /**
  * Action auto hide box if too height
  * Options: class: more   data-max-height: Int
@@ -26,7 +56,7 @@ function _viewMore(){
 
         if(content > hs) {
             $(this).css("height", hs);
-            $(this).addClass("collapse");
+            //$(this).addClass("collapse");
             $(this).after(view_btn);
         }
     });
@@ -44,6 +74,7 @@ function _viewMore(){
         }
     });
 }
+
 
 $(document).ready(function($) {
     _viewMore();
@@ -72,67 +103,46 @@ $(document).ready(function($) {
         var itemID = data_send.item_id;
         var shopID = data_send.shop_id;
 
-        swal({
-            title: "Bạn muốn xóa?",
-            text: "Sau khi xóa Item #" + itemID + ", bạn không thể hoàn tác!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            cancelButtonText: "Hủy bỏ",
-            confirmButtonText: "Xóa Sản phẩm",
-            closeOnConfirm: false
-        }, function (isConfirm) {
-            if (isConfirm) {
-                $.ajax({
-                    url: data_send.url,
-                    method: data_send.method,
-                    data: data_send,
-                    success: function (response) {
-                        if (response.success) {
-                            $('#shop-item-' + itemID).remove();
-                            if($('#shop-'+ shopID +' .shop-item').length == 0) {
-                                $('#shop-'+ shopID).remove();
-                                $('.shops_count').text(response.data.statistic.total_shops);
-                            }
-
-                            $.each(response.data.shops, function(i, v) {
-                                if (v.shop_id == shopID) {
-                                    // Get value
-                                    shop_items_count = response.data.shops[i].items.length;
-                                    shop_total = response.data.shops[i].total_amount_items;
-                                    shop_buying = response.data.shops[i].buying_fee;
-
-                                    // Set new value
-                                    $('#shop-'+ shopID +' .shop_items').text(shop_items_count);
-                                    $('#shop-'+ shopID +' .shop_total_vnd').text(enPrice(shop_total));
-                                    $('#shop-'+ shopID +' .shop_buying_fee').text(enPrice(shop_buying));
-
-                                    // Test
-                                    console.log(response.data);
-                                }
-                            });
-
-                            $('.cart_qty').text(response.data.statistic.total_items);
-                            $('.cart_total').text(enPrice(response.data.statistic.total_amount));
-
-                            var comma_separator_number_step = $.animateNumber.numberStepFactories.separator('.');
-                            $('.animate_number').each(function(i){
-                                $(this).animateNumber({ number: $(this).data('money'), numberStep: comma_separator_number_step });
-                            });
-
-                            swal("Đã xóa thành công!", "Bạn đã xóa Item #" + itemID + " thành công.", "success");
-                        }else{
-                            swal({
-                                title: "Thông báo",
-                                text: response.message
-                            })
-                        }
-                        $that.removeClass('disabled');
-                    },
-                    error: function(){
-                        $that.removeClass('disabled');
+        $.ajax({
+            url: data_send.url,
+            method: data_send.method,
+            data: data_send,
+            success: function (response) {
+                if (response.success) {
+                    $('#shop-item-' + itemID).remove();
+                    if($('#shop-'+ shopID +' .shop-item').length == 0) {
+                        $('#shop-'+ shopID).remove();
+                        $('.shops_count').text(response.data.statistic.total_shops);
                     }
-                });
+
+                    $.each(response.data.shops, function(i, v) {
+                        if (v.shop_id == shopID) {
+                            // Get value
+                            shop_items_count = response.data.shops[i].items.length;
+                            shop_total = response.data.shops[i].total_amount_items;
+                            shop_buying = response.data.shops[i].buying_fee;
+
+                            // Set new value
+                            $('#shop-'+ shopID +' .shop_items').text(shop_items_count);
+                            $('#shop-'+ shopID +' .shop_total_vnd').text(enPrice(shop_total));
+                            $('#shop-'+ shopID +' .shop_buying_fee').text(enPrice(shop_buying));
+
+                            // Test
+                            console.log(response.data);
+                        }
+                    });
+
+                    $('.cart_qty').text(response.data.statistic.total_items);
+                    $('.cart_total').text(enPrice(response.data.statistic.total_amount));
+
+                    notify('Đã xóa thành công!', "Bạn đã xóa Item #" + itemID + " thành công.", 'success');
+                }else{
+                    notify('Thông báo!', response.message, 'error');
+                }
+                $that.removeClass('disabled');
+            },
+            error: function(){
+                $that.removeClass('disabled');
             }
         });
     });
@@ -148,53 +158,26 @@ $(document).ready(function($) {
         var data_send = $that.parents('.___form').serializeObject();
         var shopID = data_send.shop_id;
 
-        swal({
-            title: "Bạn muốn xóa?",
-            text: "Sau khi xóa shop #" + shopID + ", bạn không thể hoàn tác!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            cancelButtonText: "Hủy bỏ",
-            confirmButtonText: "Xóa Shop",
-            closeOnConfirm: false
-        }, function (isConfirm) {
-            if (isConfirm) {
-                $.ajax({
-                    url: data_send.url,
-                    method: data_send.method,
-                    data: data_send,
-                    success: function (response) {
-                        if (response.success) {
-                            $('#shop-'+ shopID).remove();
-                            $('.shops_count').text(response.data.statistic.total_shops);
-                            $('.cart_qty').text(response.data.statistic.total_items);
-                            $('.cart_total').text(enPrice(response.data.statistic.total_amount));
+        $.ajax({
+            url: data_send.url,
+            method: data_send.method,
+            data: data_send,
+            success: function (response) {
+                if (response.success) {
+                    $('#shop-'+ shopID).remove();
+                    $('.shops_count').text(response.data.statistic.total_shops);
+                    $('.cart_qty').text(response.data.statistic.total_items);
+                    $('.cart_total').text(enPrice(response.data.statistic.total_amount));
 
-                            /* Set data for animate Number
-                            $('.shops_count').data('money', response.data.statistic.total_shops);
-                            $('.cart_qty').data('money', response.data.statistic.total_items);
-                            $('.cart_total').data('money', response.data.statistic.total_amount);
+                    notify('Đã xóa thành công!', "Bạn đã xóa Shop #" + shopID + " thành công.", 'success');
 
-                            // Run animate Number
-                            var comma_separator_number_step = $.animateNumber.numberStepFactories.separator('.');
-                            $('.animate_number').each(function(i){
-                                $(this).animateNumber({ number: $(this).data('money'), numberStep: comma_separator_number_step });
-                            });
-                            */
-
-                            swal("Đã xóa thành công!", "Bạn đã xóa Shop #" + shopID + " thành công.", "success");
-                        } else {
-                            swal({
-                                title: "Thông báo",
-                                text: response.message
-                            })
-                        }
-                        $that.removeClass('disabled');
-                    },
-                    error: function(){
-                        $that.removeClass('disabled');
-                    }
-                });
+                } else {
+                    notify('Thông báo!', response.message, 'error');
+                }
+                $that.removeClass('disabled');
+            },
+            error: function(){
+                $that.removeClass('disabled');
             }
         });
     });
@@ -241,10 +224,6 @@ $(document).ready(function($) {
                                     $('#shop-item-' + itemID + ' .sub_total_vnd').text(enPrice(sub_total_vnd));
                                     $('#shop-item-' + itemID + ' .sub_total').text(sub_total);
 
-                                    /* Set data for animate Number
-                                    $('#shop-item-' + itemID + ' .sub_total_vnd').data('money', sub_total_vnd);
-                                    $('#shop-item-' + itemID + ' .sub_total').data('money', sub_total);
-                                    */
                                 }
                             });
 
@@ -253,27 +232,12 @@ $(document).ready(function($) {
                             $('#shop-'+ shopID +' .shop_total_vnd').text(enPrice(shop_total));
                             $('#shop-'+ shopID +' .shop_buying_fee').text(enPrice(shop_buying));
 
-                            /* Set data for animate Number
-                            $('#shop-'+ shopID +' .shop_items').data('money', shop_items_count);
-                            $('#shop-'+ shopID +' .shop_total_vnd').data('money', shop_total);
-                            $('#shop-'+ shopID +' .shop_buying_fee').data('money', shop_buying);
-                            */
-
-                            /* Run animate Number
-                            var comma_separator_number_step = $.animateNumber.numberStepFactories.separator('.');
-                            $('.animate_number').each(function(i){
-                                $(this).animateNumber({ number: $(this).data('money'), numberStep: comma_separator_number_step });
-                            });
-                            */
                         }
                     });
                     $('.cart_qty').text(response.data.statistic.total_items);
                     $('.cart_total').text(enPrice(response.data.statistic.total_amount));
                 } else {
-                    swal({
-                        title: "Thông báo",
-                        text: response.message
-                    })
+                    notify('Thông báo!', response.message, 'error');
                 }
                 $that.removeClass('disabled');
             },
@@ -293,17 +257,6 @@ $(document).ready(function($) {
 
         var data_send = $that.parents('.___form').serializeObject();
 
-        swal({
-            title: "Hủy đơn hàng?",
-            text: "Sau khi hủy đơn hàng này, bạn không thể hoàn tác!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            cancelButtonText: "Hủy bỏ",
-            confirmButtonText: "Hủy đơn hàng",
-            closeOnConfirm: false
-        }, function (isConfirm) {
-            if (isConfirm) {
                 $.ajax({
                     url: data_send.url,
                     method: data_send.method,
@@ -312,12 +265,10 @@ $(document).ready(function($) {
                         if (response.success) {
                             $that.parents('.___form').remove();
                             $('#order_status').text('Đã hủy');
-                            swal("Hủy thành công!", "Bạn đã xóa hủy đơn hàng thành công.", "success");
+
+                            notify("Hủy thành công!", "Bạn đã xóa hủy đơn hàng thành công.", "success");
                         } else {
-                            swal({
-                                title: "Thông báo",
-                                text: response.message
-                            })
+                            notify('Thông báo!', response.message, 'error');
                         }
                         $that.removeClass('disabled');
                     },
@@ -325,7 +276,5 @@ $(document).ready(function($) {
                         $that.removeClass('disabled');
                     }
                 });
-            }
-        });
     });
 });

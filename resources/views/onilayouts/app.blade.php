@@ -18,6 +18,8 @@
     <link href="{!! asset('oniasset/libs/sortable/sortable-theme-bootstrap.css') !!}" rel="stylesheet" />
     <link href="{!! asset('oniasset/libs/bootstrap-datepicker/css/datepicker.css') !!}" rel="stylesheet" />
     <link href="{!! asset('oniasset/libs/jquery-icheck/skins/all.css') !!}" rel="stylesheet" />
+    <link href="{!! asset('oniasset/libs/jquery-notifyjs/styles/metro/notify-metro.css') !!}" rel="stylesheet" type="text/css" />
+
 
     <link href="{!! asset('oniasset/css/style.css') !!}" rel="stylesheet" type="text/css" />
     <!-- Extra CSS Libraries End -->
@@ -32,7 +34,7 @@
 <body class="fixed-left">
 
 <!-- Wrapper-->
-<div id="wrapper">
+<div id="wrapper" class="enlarged forced">
 @include('onilayouts.topnavbar')
 @include('onilayouts.navigation')
     <!-- Start right content -->
@@ -77,6 +79,9 @@
 <script src="{!! asset('oniasset/libs/pace/pace.min.js') !!}"></script>
 <script src="{!! asset('oniasset/libs/bootstrap-datepicker/js/bootstrap-datepicker.js') !!}"></script>
 <script src="{!! asset('oniasset/libs/jquery-icheck/icheck.min.js') !!}"></script>
+<script src="{!! asset('oniasset/libs/jquery-notifyjs/notify.min.js') !!}"></script>
+<script src="{!! asset('oniasset/libs/jquery-notifyjs/styles/metro/notify-metro.js') !!}"></script>
+
 
 <script src="{!! asset('oniasset/js/init.js') !!}" type="text/javascript"></script>
 

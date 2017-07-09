@@ -47,3 +47,59 @@ table.shoping-cart-table tr td {
     text-align: right;
     width: 15%;
 }
+
+.touchspin {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+}
+
+.order-item .item-inner{
+    margin-left: 20px;
+    position: relative;
+    min-height: 100px;
+}
+.order-item .item-thumb{
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    position: absolute;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.order-item .item-thumb .label{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.order-item .item-details {
+    margin-left: 115px;
+}
+.order-item .item-details .item-title{
+    margin-top: 0;
+}
+.order-item .item-details .col-info{
+    width: 50%;
+    float: left;
+}
+.more {
+    overflow: hidden;
+    display: block;
+}
+
+.no-content{
+    text-align: center;
+    padding: 50px 10px;
+}
+.no-content .icon{
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+.no-content .title{
+    font-size: 18px;
+}
+.no-content .subtitle{
+
+}

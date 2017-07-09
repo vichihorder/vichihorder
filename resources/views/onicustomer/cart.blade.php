@@ -156,7 +156,7 @@
                                                         </form>
                                                     </div>
                                                 </td>
-                                                <td width="100">
+                                                <td width="100" class="text-right">
                                                     <span class="price_vnd">{{ App\Util::formatNumber($item->price_calculator_vnd) }}</span><sup>đ</sup>
                                                     <p class="small text-muted">¥<span class="price">{{$item->price_calculator}}</span></p>
                                                 </td>
@@ -181,7 +181,7 @@
                                                                 class="form-control text-center touchspin __changeQty" value="{{$item->quantity}}" />
                                                     </form>
                                                 </td>
-                                                <td width="100">
+                                                <td width="100" class="text-right">
                                                     <strong>
                                                         <span class="sub_total_vnd">{{ App\Util::formatNumber($item->total_amount_item_vnd)  }}</span><sup>đ</sup>
                                                     </strong>
