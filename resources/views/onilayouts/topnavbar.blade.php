@@ -127,9 +127,9 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="right-opener">
+                    {{--<li class="right-opener">
                         <a href="javascript:;" class="open-right"><i class="fa fa-angle-double-left"></i><i class="fa fa-angle-double-right"></i></a>
-                    </li>
+                    </li>--}}
                 </ul>
             </div>
             <!--/.nav-collapse -->
